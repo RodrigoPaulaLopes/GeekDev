@@ -32,15 +32,17 @@ public class Seeders implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
         Post mariaPost = new Post(null, Instant.now(), "Viajar", "Viajem para são paulo", maria);
+        Post mariaPost2 = new Post(null, Instant.now(), "Dormir", "Bateu o sono pessoal fui", maria);
+        Post mariaPost3 = new Post(null, Instant.now(), "Como fazer coxinha", "como fazer coxinha pessoal", maria);
         Post alexPost = new Post(null, Instant.now(), "jogoando futeboll", "Jogando futebol com os parças", alex);
         Post bobPost = new Post(null, Instant.now(), "jogoando Video game", "Jogando video game com os parças", bob);
 
-        postRepository.saveAll(Arrays.asList(mariaPost, alexPost));
+        postRepository.saveAll(Arrays.asList(mariaPost, mariaPost2, mariaPost3, alexPost, bobPost));
 
-        maria.getPosts().add(mariaPost);
+        maria.getPosts().addAll(Arrays.asList(mariaPost, mariaPost2, mariaPost3));
         alex.getPosts().add(alexPost);
         bob.getPosts().add(bobPost);
-        userRepository.saveAll(Arrays.asList(maria, alex));
+        userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
 
 
