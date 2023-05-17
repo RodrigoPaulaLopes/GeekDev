@@ -2,6 +2,8 @@ package com.rodrigo.GeekDev.config;
 
 import com.rodrigo.GeekDev.domain.Post;
 import com.rodrigo.GeekDev.domain.User;
+import com.rodrigo.GeekDev.dtos.AuthorDto;
+import com.rodrigo.GeekDev.dtos.ComentarioDto;
 import com.rodrigo.GeekDev.repository.PostRepository;
 import com.rodrigo.GeekDev.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +33,16 @@ public class Seeders implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
-        Post mariaPost = new Post(null, Instant.now(), "Viajar", "Viajem para são paulo", maria);
-        Post mariaPost2 = new Post(null, Instant.now(), "Dormir", "Bateu o sono pessoal fui", maria);
-        Post mariaPost3 = new Post(null, Instant.now(), "Como fazer coxinha", "como fazer coxinha pessoal", maria);
-        Post alexPost = new Post(null, Instant.now(), "jogoando futeboll", "Jogando futebol com os parças", alex);
-        Post bobPost = new Post(null, Instant.now(), "jogoando Video game", "Jogando video game com os parças", bob);
+        Post mariaPost = new Post(Instant.now(), "Viajar", "Viajem para são paulo", maria);
+        Post mariaPost2 = new Post(Instant.now(), "Dormir", "Bateu o sono pessoal fui", maria);
+        Post mariaPost3 = new Post(Instant.now(), "Como fazer coxinha", "como fazer coxinha pessoal", maria);
+        Post alexPost = new Post(Instant.now(), "jogoando futeboll", "Jogando futebol com os parças", alex);
+        Post bobPost = new Post(Instant.now(), "jogoando Video game", "Jogando video game com os parças", bob);
+
+        ComentarioDto c1 = new ComentarioDto("Boa viagem, mana", Instant.now(), new AuthorDto(alex));
+        ComentarioDto c2 = new ComentarioDto("Ta ficando rica, menina", Instant.now(), new AuthorDto(bob));
+
+        mariaPost.setComentarios(Arrays.asList(c1, c2));
 
         postRepository.saveAll(Arrays.asList(mariaPost, mariaPost2, mariaPost3, alexPost, bobPost));
 
