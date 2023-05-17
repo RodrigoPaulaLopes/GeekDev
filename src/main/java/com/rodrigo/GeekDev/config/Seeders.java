@@ -25,16 +25,22 @@ public class Seeders implements CommandLineRunner {
         userRepository.deleteAll();
         postRepository.deleteAll();
 
-        User maria = new User(null, "Maria Brown", "maria@gmail.com");
-        User alex = new User(null, "Alex Green", "alex@gmail.com");
-        User bob = new User(null, "Bob Grey", "bob@gmail.com");
+        User maria = new User( "Maria Brown", "maria@gmail.com");
+        User alex = new User("Alex Green", "alex@gmail.com");
+        User bob = new User("Bob Grey", "bob@gmail.com");
 
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
         Post mariaPost = new Post(null, Instant.now(), "Viajar", "Viajem para são paulo", maria);
         Post alexPost = new Post(null, Instant.now(), "jogoando futeboll", "Jogando futebol com os parças", alex);
+        Post bobPost = new Post(null, Instant.now(), "jogoando Video game", "Jogando video game com os parças", bob);
 
         postRepository.saveAll(Arrays.asList(mariaPost, alexPost));
+
+        maria.getPosts().add(mariaPost);
+        alex.getPosts().add(alexPost);
+        bob.getPosts().add(bobPost);
+        userRepository.saveAll(Arrays.asList(maria, alex));
 
 
 

@@ -2,6 +2,7 @@ package com.rodrigo.GeekDev.resources;
 
 import com.rodrigo.GeekDev.dtos.AtualizarUsuarioDto;
 import com.rodrigo.GeekDev.dtos.InserirUsuarioDto;
+import com.rodrigo.GeekDev.dtos.ListarPostsDto;
 import com.rodrigo.GeekDev.dtos.ListarUsuarioDTO;
 import com.rodrigo.GeekDev.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class UserResource {
     @GetMapping("/{id}")
     public ResponseEntity<ListarUsuarioDTO> findById(@PathVariable String id) {
         return ResponseEntity.ok().body(userService.findById(id));
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<ListarPostsDto>> findPosts(@PathVariable String id) {
+        return ResponseEntity.ok().body(userService.findPosts(id));
     }
 
     @PostMapping

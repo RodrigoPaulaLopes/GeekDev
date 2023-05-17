@@ -3,12 +3,15 @@ package com.rodrigo.GeekDev.services;
 import com.rodrigo.GeekDev.domain.User;
 import com.rodrigo.GeekDev.dtos.AtualizarUsuarioDto;
 import com.rodrigo.GeekDev.dtos.InserirUsuarioDto;
+import com.rodrigo.GeekDev.dtos.ListarPostsDto;
 import com.rodrigo.GeekDev.dtos.ListarUsuarioDTO;
 import com.rodrigo.GeekDev.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -41,5 +44,10 @@ public class UserService {
     public void remove(String id) {
         var oldUser = userRepository.findById(id).get();
         userRepository.delete(oldUser);
+    }
+
+    public List<ListarPostsDto> findPosts(String id) {
+        var usuario = userRepository.findById(id).get();
+        return usuario.getPosts().stream().map(ListarPostsDto::new).toList();
     }
 }
